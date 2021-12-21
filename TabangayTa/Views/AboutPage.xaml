@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabangayTa.Views.AboutPage"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:vm="clr-namespace:TabangayTa.ViewModels">
+    
+    <ContentPage.BindingContext>
+        <vm:AboutViewModel />
+    </ContentPage.BindingContext>
+    
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto, *, Auto" Padding="0,0,20,0" ColumnSpacing="10">
+            <Label Grid.Column="1" Style="{StaticResource LabelPageTitleStyle}"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <Grid RowDefinitions="Auto, Auto, Auto, Auto, Auto, Auto, *" Padding="20,10,20,0" RowSpacing="10">
+        <Image Source="logo_white" HeightRequest="75" Aspect="AspectFit" Margin="0" VerticalOptions="Start" HorizontalOptions="Start"/>
+        <Label Text="#TabangayTa" FontFamily="MTBBold" FontSize="Medium" TextColor="{StaticResource Highlight}" HorizontalOptions="End" VerticalOptions="Center"/>
+
+        <Label Grid.Row="1" Text="Buy one, donate one generator!" FontSize="40" FontFamily="MTBBold" HorizontalOptions="Center" HorizontalTextAlignment="Center" />
+
+        <Label Grid.Row="2" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="cost" TextTransform="Uppercase" FontFamily="MTBBold" FontSize="Large"/>
+                    <Span Text="{x:Static sys:Environment.NewLine}"/>
+                    <Span Text="17,500 PHP" FontSize="Title"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Label Grid.Row="3" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="specs" TextTransform="Uppercase" FontFamily="MTBBold" FontSize="Large"/>
+                    <Span Text="{x:Static sys:Environment.NewLine}"/>
+                    <Span Text="800W - 1500W" FontSize="Title"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Label Grid.Row="4" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="order cut off" TextTransform="Uppercase" FontFamily="MTBBold" FontSize="Large"/>
+                    <Span Text="{x:Static sys:Environment.NewLine}"/>
+                    <Span Text="12 AM" FontSize="Title"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+        
+        <Label Grid.Row="5" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="delivery time" TextTransform="Uppercase" FontFamily="MTBBold" FontSize="Large"/>
+                    <Span Text="{x:Static sys:Environment.NewLine}"/>
+                    <Span Text="Tuesday @ 11 PM" FontSize="Title"/>
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <Image Grid.Row="6" Source="generator" Aspect="AspectFit"/>
+    </Grid>
+
+</ContentPage>

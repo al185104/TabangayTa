@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="TabangayTa.Views.MorePage">
+    
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto, *, Auto" Padding="0,0,20,0" ColumnSpacing="10">
+            <Label Grid.Column="1" Style="{StaticResource LabelPageTitleStyle}"/>
+        </Grid>
+    </Shell.TitleView>
+    
+    <ContentPage.Content>
+        <Grid Padding="20,10" RowDefinitions="Auto, *" RowSpacing="20">
+            <Image Source="logo_white" HeightRequest="75" Aspect="AspectFit" Margin="0" VerticalOptions="Start" HorizontalOptions="Start"/>
+            <Label Text="#TabangayTa" FontFamily="MTBBold" FontSize="Medium" TextColor="{StaticResource Highlight}" HorizontalOptions="End" VerticalOptions="Center"/>
+
+            <StackLayout Grid.Row="1" Spacing="40" VerticalOptions="FillAndExpand">
+                <Label HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Tabangay Ta!" TextTransform="Uppercase" FontSize="40" FontFamily="MTBBold" />
+                            <Span Text="{x:Static sys:Environment.NewLine}"/>
+                            <Span Text="We consolidate the locations of essential resources." FontSize="Large"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <Label Text="This is a non-profit project to help each other get through this calamity fast. #LabanLang" 
+                       HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Large"/>
+
+                <Label Text="Your contribution goes a long way. We now have 687 registered locations across Cebu, Bohol, Misamis, Negros, Samar, Palawan, etc. Help us keep the locations up-to-date by posting comments on each location"
+                       HorizontalOptions="Center" HorizontalTextAlignment="Center" FontSize="Small"/>
+
+                <Frame HorizontalOptions="EndAndExpand" BackgroundColor="{StaticResource Accent}">
+                    <Label Text="Please visit https://tabangay-ta.personal-cto.co to find the locations of resources you need or to add more resource locations." 
+                           HorizontalOptions="Center" HorizontalTextAlignment="Center" TextColor="White"/>
+                </Frame>
+            </StackLayout>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

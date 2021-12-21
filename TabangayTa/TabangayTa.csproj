@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Common\Fonts\Feather.ttf" />
+    <None Remove="Common\Fonts\MADE TOMMY Bold.otf" />
+    <None Remove="Common\Fonts\MADE TOMMY Light.otf" />
+    <None Remove="Common\Fonts\MADE TOMMY Regular.otf" />
+    <None Remove="Common\Fonts\MADE TOMMY Thin.otf" />
+    <None Remove="Common\Fonts\Material.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Common\Fonts\Feather.ttf" />
+    <EmbeddedResource Include="Common\Fonts\MADE TOMMY Bold.otf" />
+    <EmbeddedResource Include="Common\Fonts\MADE TOMMY Light.otf" />
+    <EmbeddedResource Include="Common\Fonts\MADE TOMMY Regular.otf" />
+    <EmbeddedResource Include="Common\Fonts\MADE TOMMY Thin.otf" />
+    <EmbeddedResource Include="Common\Fonts\Material.ttf" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="IdentityModel" Version="5.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2291" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />  
+    <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2291" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MainPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\MorePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

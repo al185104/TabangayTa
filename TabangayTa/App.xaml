@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TabangayTa.App">
+    <!--
+        Define global resources and styles here, that apply to all pages in your app.
+    -->
+    <Application.Resources>
+        <ResourceDictionary>
+            
+            <!--#region Colors -->
+            <Color x:Key="Accent">#DD2476</Color>
+            <Color x:Key="Black">#350C1E</Color>
+            <Color x:Key="Highlight">#F5006E</Color>
+            <!--#endregion-->
+
+            <Color x:Key="Primary">#2196F3</Color>
+
+            <!--#region Custom Styles -->
+            <Style TargetType="Button" ApplyToDerivedTypes="True">
+                <Setter Property="FontFamily" Value="MTBBold"/>
+                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Accent}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Disabled">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#33DD2476" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="MTB"/>
+                <Setter Property="TextColor" Value="{StaticResource Black}"/>
+            </Style>
+
+            <Style x:Key="LabelPageTitleStyle" TargetType="Label" >
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontSize" Value="Large"/>
+                <Setter Property="FontFamily" Value="MTB"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="Text" Value="{Binding Title}"/>
+            </Style>
+
+            <Style TargetType="ActivityIndicator" ApplyToDerivedTypes="True">
+                <Setter Property="Color" Value="{DynamicResource Accent}"/>
+                <Setter Property="IsRunning" Value="{Binding IsBusy}"/>
+                <Setter Property="IsVisible" Value="{Binding IsBusy}"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="WidthRequest" Value="300"/>
+                <Setter Property="HeightRequest" Value="300"/>
+            </Style>
+            <!--#endregion-->
+        </ResourceDictionary>        
+    </Application.Resources>
+</Application>
