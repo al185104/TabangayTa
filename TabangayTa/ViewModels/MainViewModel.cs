@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -48,7 +45,7 @@ namespace TabangayTa.ViewModels
         #endregion
 
         #region Commands
-        public ICommand ChangeStateCommand { get; set; } 
+        public ICommand ChangeStateCommand { get; set; }
         public ICommand SelectResourceCommand { get; set; }
         public ICommand RefreshCommand { get; set; }
         #endregion
@@ -63,17 +60,17 @@ namespace TabangayTa.ViewModels
 
             ChangeStateCommand = new Command<MapViewStateEnum>((param) =>
             {
-                if(param != stateEnum)
+                if (param != stateEnum)
                     StateEnum = param;
             });
 
-            SelectResourceCommand = new Command<string>((param) => 
+            SelectResourceCommand = new Command<string>((param) =>
             {
                 ChangeStateCommand.Execute(MapViewStateEnum.Normal);
                 MakeResourcePins(param);
             });
 
-            RefreshCommand = new Command(async() =>
+            RefreshCommand = new Command(async () =>
             {
                 resourcePin = null;
                 await OnAppearing();
@@ -84,9 +81,9 @@ namespace TabangayTa.ViewModels
         internal async Task OnAppearing()
         {
             ChangeStateCommand.Execute(MapViewStateEnum.Normal);
-            if(resourcePin == null)
+            if (resourcePin == null)
             {
-                await InitializeGeolocation(true);
+                await InitializeGeolocation();
                 await InitializeResourcePins(ResourceType.ChargingStation);
             }
         }
@@ -132,7 +129,7 @@ namespace TabangayTa.ViewModels
                     Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2)));
                     SettingsService.Latitude = location.Latitude;
                     SettingsService.Longitude = location.Longitude;
-                }                
+                }
             }
             catch (Xamarin.Essentials.FeatureNotSupportedException fnsEx)
             {
@@ -178,11 +175,11 @@ namespace TabangayTa.ViewModels
                 do
                 {
                     var ret = await ResourcePinService.GetResourcePins(limit, cursor);
-                    if(ret != null)
+                    if (ret != null)
                     {
                         cursor += limit;
                         remaining = ret.response.remaining;
-                        if(remaining < limit) limit = remaining;
+                        if (remaining < limit) limit = remaining;
 
 
                         resourcePin.response.cursor = ret.response.cursor;
@@ -190,7 +187,7 @@ namespace TabangayTa.ViewModels
                         resourcePin.response.remaining = ret.response.remaining;
                         resourcePin.response.results.AddRange(ret.response.results);
                     }
-                } while(remaining > 0);
+                } while (remaining > 0);
 
 
                 MakeResourcePins(resourceType);
@@ -211,12 +208,12 @@ namespace TabangayTa.ViewModels
             if (resourcePin == null) return;
 
             SelectedResourceLogo = resourceType;
-            var pins = resourcePin.response.results.Where(i => !string.IsNullOrEmpty(i.ResourceType) && !string.IsNullOrEmpty(i.resourceStatus) 
+            var pins = resourcePin.response.results.Where(i => !string.IsNullOrEmpty(i.ResourceType) && !string.IsNullOrEmpty(i.resourceStatus)
             && i.resourceStatus.Equals("Available") && i.ResourceType.Equals(resourceType));
             Map.Pins.Clear();
             foreach (var pin in pins)
             {
-                if(pin != null && pin.geolocation != null && pin.geolocation.lng != 0 && pin.geolocation.lat != 0)
+                if (pin != null && pin.geolocation != null && pin.geolocation.lng != 0 && pin.geolocation.lat != 0)
                 {
                     Console.WriteLine($"{pin.locationName} - {pin.geolocation.address} - {pin.geolocation.lat} - {pin.geolocation.lng}");
                     Map.Pins.Add(new Pin

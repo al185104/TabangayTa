@@ -1,5 +1,4 @@
-﻿using TabangayTa.Exceptions;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 using System;
@@ -7,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using TabangayTa.Exceptions;
 
 namespace TabangayTa.Services.RequestProvider
 {

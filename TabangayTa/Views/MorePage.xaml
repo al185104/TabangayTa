@@ -2,7 +2,11 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:vm="clr-namespace:TabangayTa.ViewModels"
              x:Class="TabangayTa.Views.MorePage">
+    <ContentPage.BindingContext>
+        <vm:MoreViewModel/>
+    </ContentPage.BindingContext>
     
     <Shell.TitleView>
         <Grid ColumnDefinitions="Auto, *, Auto" Padding="0,0,20,0" ColumnSpacing="10">

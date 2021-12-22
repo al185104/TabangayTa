@@ -4,7 +4,6 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using TabangayTa.Models;
 using TabangayTa.Services;
-using TabangayTa.Services.ResourcePins;
 using TabangayTa.Services.Settings;
 using Xamarin.Forms;
 
@@ -14,7 +13,7 @@ namespace TabangayTa.ViewModels
     {
         #region Private        
         public IDataStore<Item> DataStore => DependencyService.Get<IDataStore<Item>>();
-        public ISettingsService SettingsService => DependencyService.Get<ISettingsService>();        
+        public ISettingsService SettingsService => DependencyService.Get<ISettingsService>();
         #endregion
 
         bool isBusy = false;

@@ -1,11 +1,8 @@
-﻿using System;
-using TabangayTa.Services;
+﻿using TabangayTa.Services;
 using TabangayTa.Services.RequestProvider;
 using TabangayTa.Services.ResourcePins;
 using TabangayTa.Services.Settings;
-using TabangayTa.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace TabangayTa
 {

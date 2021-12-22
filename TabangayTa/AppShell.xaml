@@ -29,9 +29,4 @@
         <ShellContent Title="About" Icon="{FontImage FontFamily=FeatherIcons, Glyph={x:Static helper:Icon.Info}}" Route="AboutPage" ContentTemplate="{DataTemplate local:AboutPage}" />
         <ShellContent Title="More" Icon="{FontImage FontFamily=FeatherIcons, Glyph={x:Static helper:Icon.HelpCircle}}" ContentTemplate="{DataTemplate local:MorePage}" />
     </TabBar>
-
-    <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
-    </TabBar>
-
 </Shell>

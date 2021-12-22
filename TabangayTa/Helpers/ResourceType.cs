@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace TabangayTa.Helpers
+﻿namespace TabangayTa.Helpers
 {
     public static class ResourceType
     {

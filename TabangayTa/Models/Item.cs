@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TabangayTa.Models
+﻿namespace TabangayTa.Models
 {
     public class Item
     {
