@@ -29,7 +29,8 @@
     
     <ContentPage.Content>
         <Grid>
-            <ContentView Content="{Binding Map}"/>
+            <ContentView x:Name="map" Content="{Binding Map}"/>
+            
             <ActivityIndicator/>
 
             <Frame HeightRequest="50" WidthRequest="50" HorizontalOptions="End" VerticalOptions="Start" CornerRadius="10" Margin="10" Padding="0" BackgroundColor="{StaticResource Highlight}">

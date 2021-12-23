@@ -8,6 +8,7 @@ using System.Windows.Input;
 using TabangayTa.Helpers;
 using TabangayTa.Models;
 using TabangayTa.Services.ResourcePins;
+using TabangayTa.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 
@@ -56,6 +57,10 @@ namespace TabangayTa.ViewModels
             Title = "My Map";
             Map = new Map();
             Map.Pins.Clear();
+            Map.MapClicked += async (sender, e) => {
+                await Shell.Current.GoToAsync($"{nameof(AddNewResourcePinPage)}?{nameof(AddNewResourcePinViewModel.Lat)}={e.Position.Latitude}&{nameof(AddNewResourcePinViewModel.Lng)}={e.Position.Longitude}");
+            };
+
             SelectedResourceLogo = string.Empty;
 
             ChangeStateCommand = new Command<MapViewStateEnum>((param) =>
@@ -75,6 +80,18 @@ namespace TabangayTa.ViewModels
                 resourcePin = null;
                 await OnAppearing();
             });
+
+            MessagingCenter.Unsubscribe<AddNewResourcePinViewModel, Pin>(this, MessagingKeys.SetMapPins);
+            MessagingCenter.Subscribe<AddNewResourcePinViewModel, Pin>(this, MessagingKeys.SetMapPins, (sender, arg) =>
+            {
+                Map.Pins.Add(new Pin
+                {
+                    Type = PinType.Place,
+                    Address = arg.Address,
+                    Label = arg.Label,
+                    Position = new Position(arg.Position.Latitude, arg.Position.Longitude)
+                });
+            });
         }
         #endregion
 
@@ -83,7 +100,7 @@ namespace TabangayTa.ViewModels
             ChangeStateCommand.Execute(MapViewStateEnum.Normal);
             if (resourcePin == null)
             {
-                await InitializeGeolocation();
+                await InitializeGeolocation(true);
                 await InitializeResourcePins(ResourceType.ChargingStation);
             }
         }
@@ -95,9 +112,9 @@ namespace TabangayTa.ViewModels
             {
                 var location = await Xamarin.Essentials.Geolocation.GetLastKnownLocationAsync();
                 if (location != null)
-                    map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2)));
+                    map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
                 else
-                    map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(SettingsService.Latitude, SettingsService.Longitude), Distance.FromKilometers(2)));
+                    map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(SettingsService.Latitude, SettingsService.Longitude), Distance.FromKilometers(1)));
             }
             catch (Exception ex)
             {
@@ -115,7 +132,7 @@ namespace TabangayTa.ViewModels
             IsBusy = true;
             try
             {
-                var request = new Xamarin.Essentials.GeolocationRequest(Xamarin.Essentials.GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                var request = new Xamarin.Essentials.GeolocationRequest(Xamarin.Essentials.GeolocationAccuracy.Medium, TimeSpan.FromSeconds(1));
                 cts = new CancellationTokenSource();
                 var location = await Xamarin.Essentials.Geolocation.GetLocationAsync(request, cts.Token);
                 if (location != null)
@@ -126,7 +143,7 @@ namespace TabangayTa.ViewModels
                         location.Longitude = 123.93540581185819;
                     }
 
-                    Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(2)));
+                    Map.MoveToRegion(MapSpan.FromCenterAndRadius(new Position(location.Latitude, location.Longitude), Distance.FromKilometers(1)));
                     SettingsService.Latitude = location.Latitude;
                     SettingsService.Longitude = location.Longitude;
                 }
@@ -140,7 +157,7 @@ namespace TabangayTa.ViewModels
             catch (Xamarin.Essentials.FeatureNotEnabledException fneEx)
             {
                 // Handle not enabled on device exception
-                Debug.WriteLine(fneEx.Message);
+                await App.Current.MainPage.DisplayAlert("Phone location disabled.","Please enable your device location and run the app again.", "Okay");
                 throw;
             }
             catch (Xamarin.Essentials.PermissionException pEx)
@@ -215,7 +232,6 @@ namespace TabangayTa.ViewModels
             {
                 if (pin != null && pin.geolocation != null && pin.geolocation.lng != 0 && pin.geolocation.lat != 0)
                 {
-                    Console.WriteLine($"{pin.locationName} - {pin.geolocation.address} - {pin.geolocation.lat} - {pin.geolocation.lng}");
                     Map.Pins.Add(new Pin
                     {
                         Type = PinType.Place,

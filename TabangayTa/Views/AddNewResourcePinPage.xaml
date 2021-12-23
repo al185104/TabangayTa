@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:TabangayTa.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:converter="clr-namespace:TabangayTa.Converters"
+             xmlns:helper="clr-namespace:TabangayTa.Helpers"
+             x:Class="TabangayTa.Views.AddNewResourcePinPage">
+    
+    <Shell.TitleView>
+        <Grid ColumnDefinitions="Auto, *, Auto" Padding="0,0,20,0" ColumnSpacing="10">
+            <Label Grid.Column="1" Style="{StaticResource LabelPageTitleStyle}"/>
+        </Grid>
+    </Shell.TitleView>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:ResourceToIconConverter x:Key="ResourceToIconConverter"/>
+
+            <Style TargetType="Image">
+                <Setter Property="VerticalOptions" Value="End"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="Margin" Value="0,10"/>
+            </Style>
+            
+            <ControlTemplate x:Key="RadioButtonTemplate">
+                <Frame BorderColor="#F3F2F1"
+                   BackgroundColor="#F3F2F1"
+                   HasShadow="False"
+                   HeightRequest="100"
+                   WidthRequest="100"
+                   HorizontalOptions="Start"
+                   VerticalOptions="Start"
+                   Padding="0">
+                    <VisualStateManager.VisualStateGroups>
+                        <VisualStateGroupList>
+                            <VisualStateGroup x:Name="CheckedStates">
+                                <VisualState x:Name="Checked">
+                                    <VisualState.Setters>
+                                        <Setter Property="BorderColor"  Value="#FF3300" />
+                                        <Setter TargetName="check" Property="Opacity" Value="1" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked">
+                                    <VisualState.Setters>
+                                        <Setter Property="BackgroundColor" Value="#F3F2F1" />
+                                        <Setter Property="BorderColor" Value="#F3F2F1" />
+                                        <Setter TargetName="check" Property="Opacity" Value="0" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateGroupList>
+                    </VisualStateManager.VisualStateGroups>
+                    <Grid Margin="4"
+                      WidthRequest="100">
+                        <Grid WidthRequest="18"
+                          HeightRequest="18"
+                          HorizontalOptions="End"
+                          VerticalOptions="Start">
+                            <Ellipse Stroke="Blue"
+                                 Fill="White"
+                                 WidthRequest="16"
+                                 HeightRequest="16"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                            <Ellipse x:Name="check"
+                                 Fill="Blue"
+                                 WidthRequest="8"
+                                 HeightRequest="8"
+                                 HorizontalOptions="Center"
+                                 VerticalOptions="Center" />
+                        </Grid>
+                        <ContentPresenter />
+                    </Grid>
+                </Frame>
+            </ControlTemplate>
+
+            <Style TargetType="RadioButton">
+                <Setter Property="ControlTemplate" Value="{StaticResource RadioButtonTemplate}" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <vm:AddNewResourcePinViewModel/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" Padding="10" RowSpacing="10">
+            <Label Grid.Row="0" HorizontalOptions="Center" HorizontalTextAlignment="Center">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Resources near you" FontSize="Title" FontFamily="MTBBold"/>
+                        <Span Text="{x:Static sys:Environment.NewLine}"/>
+                        <Span Text="Please fill everything accurately."/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+            <StackLayout Grid.Row="1">
+                <Label Text="Specify the resource type." />
+                <Grid RadioButtonGroup.GroupName="resourceType" ColumnDefinitions="*,*,*,*" RadioButtonGroup.SelectedValue="{Binding TypeSelection}">
+                    <RadioButton Grid.Column="0" Value="Charging Station">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.BatteryCharging70}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Charging Station" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Column="1" Value="Water Station">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.Water}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Drinking Water" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Column="2" Value="Signal / WiFi">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.Signal}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Signal / Wifi" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Column="3" Value="Clinics / Pharmacies">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.Pharmacy}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Clinics / Pharmacies" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+
+                    <RadioButton Grid.Row="1" Grid.Column="0" Value="ATM/Remittance">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.Atm}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="ATM / Remittance" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="1" Value="Fuel for Vehicles">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.GasStation}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Gas Station" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="2" Value="Water Station">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.WaterPump}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Water Station" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                    <RadioButton Grid.Row="1" Grid.Column="3" Value="Grocery">
+                        <RadioButton.Content>
+                            <StackLayout>
+                                <Image Source="{FontImage Glyph={x:Static helper:IconFont.Cart}, FontFamily=MaterialIcons, Size=Title, Color={StaticResource Accent}}"/>
+                                <Label Text="Groceries" HorizontalOptions="Center" VerticalOptions="End" HorizontalTextAlignment="Center"/>
+                            </StackLayout>
+                        </RadioButton.Content>
+                    </RadioButton>
+                </Grid>
+            </StackLayout>
+
+            <Picker Grid.Row="2" Title="Select resource status" FontFamily="MTB" HorizontalTextAlignment="Center" SelectedItem="{Binding Status}">
+                <Picker.Items>
+                    <x:String>Available</x:String>
+                    <x:String>Unavailable</x:String>
+                    <x:String>For verification</x:String>
+                </Picker.Items>
+            </Picker>
+
+            <Frame Grid.Row="3" Padding="0">
+                <Entry Placeholder="Name of the place" FontFamily="MTB" Text="{Binding Name}"/>
+            </Frame>
+
+            <Frame Grid.Row="4" Padding="0">
+                <Editor Placeholder="Address information" Text="{Binding Address}" FontFamily="MTB"/>
+            </Frame>
+
+            <Button Grid.Row="5" Text="Send" VerticalOptions="End" Command="{Binding SendResourceCommand}"/>
+
+            <ActivityIndicator Grid.RowSpan="6"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

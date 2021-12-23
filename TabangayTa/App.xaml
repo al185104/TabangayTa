@@ -19,7 +19,7 @@
             <!--#region Custom Styles -->
             <Style TargetType="Button" ApplyToDerivedTypes="True">
                 <Setter Property="FontFamily" Value="MTBBold"/>
-                <Setter Property="TextColor" Value="White"></Setter>
+                <Setter Property="TextColor" Value="White"/>
                 <Setter Property="VisualStateManager.VisualStateGroups">
                     <VisualStateGroupList>
                         <VisualStateGroup x:Name="CommonStates">

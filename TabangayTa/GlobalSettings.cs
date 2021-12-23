@@ -6,8 +6,8 @@ namespace TabangayTa
     {
         public const string AzureTag = "Azure";
         public const string MockTag = "Mock";
-        //public const string DefaultEndpoint = "";
-        public const string DefaultEndpoint = "https://tabangay-ta.personal-cto.co/api/1.1/obj/";
+        public const string DefaultEndpoint = "https://tabangay-ta.personal-cto.co/version-test/api/1.1/obj/";
+        //public const string DefaultEndpoint = "https://tabangay-ta.personal-cto.co/api/1.1/obj/";
         private string _baseIdentityEndpoint;
         private string _baseGatewayShoppingEndpoint;
         private string _baseGatewayMarketingEndpoint;
